@@ -3,33 +3,31 @@ import java.util.Random;
 public class Main {
     public static void main(String... args) {
 
-        int v = 5;
-        ArrayList<ArrayList<Integer>> adj = inputInit(v);
+        int numberOfVertices = 5;
+        int numberOfIterations = 50;
+
+        ArrayList<ArrayList<Integer>> adj = inputInit(numberOfVertices);
 
         int minSetCover = Integer.MAX_VALUE;
-        boolean[] randomBoolean = new boolean[v];
+        boolean[] randomBoolean = new boolean[numberOfVertices];
         Random random = new Random();
 
-        int numberOfIterations = 50;
         for (int i = 0; i < numberOfIterations; i++) {
             System.out.println("\n\n --- Iteration number(i): " + i + "\n");
 
-            // random boolean set 01100
-            for (int j = 0; j < v; j++) {
+            for (int j = 0; j < numberOfVertices; j++) { // random boolean set 01100
                 randomBoolean[j] = random.nextBoolean();
                 System.out.print(" " + randomBoolean[j]);
             }
             System.out.println();
 
-            // check for valid set cover
             if (!isValidSetCover(adj, randomBoolean)) continue;
 
-            // if validSetCover < minSetCover
-            // minSetCover = validSetCover;
             int cardinalityOfValidSetCover = 0;
-            for (int l = 0; l < v; l++) {
+            for (int l = 0; l < numberOfVertices; l++) {
                 if (randomBoolean[l]) cardinalityOfValidSetCover++;
             }
+
             if (cardinalityOfValidSetCover < minSetCover) minSetCover = cardinalityOfValidSetCover;
             System.out.println("--- cardinalityOfValidSetCover = " + cardinalityOfValidSetCover + "\n");
         }
