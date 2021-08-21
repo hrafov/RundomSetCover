@@ -2,43 +2,29 @@ import java.util.ArrayList;
 import java.util.Random;
 public class Main {
     public static void main(String...args) {
-
         int numberOfVertices = 16;
         int numberOfIterations = 50000;
-
         ArrayList<ArrayList<Integer>> adj = inputInit(numberOfVertices);
-
         int minSetCover = Integer.MAX_VALUE;
         boolean[] randomBoolean = new boolean[numberOfVertices];
         Random random = new Random();
         boolean[] randomBooleanResultWithMinSetCover = new boolean[numberOfVertices];
-
         for (int i = 0; i < numberOfIterations; i++) {
-            //System.out.println("\n\n --- Iteration number(i): " + i + "\n");
-
             for (int j = 0; j < numberOfVertices; j++) { // random boolean set 01100
                 randomBoolean[j] = random.nextBoolean();
-                //System.out.print(" " + randomBoolean[j]);
             }
-            //System.out.println();
-
             if (!isValidSetCover(adj, randomBoolean)) continue;
-
             int cardinalityOfValidSetCover = 0;
-            for (int l = 0; l < numberOfVertices; l++) {
-                if (randomBoolean[l]) cardinalityOfValidSetCover++;
+            for (Boolean l : randomBoolean) {
+                if (l) cardinalityOfValidSetCover++;
             }
-
             if (cardinalityOfValidSetCover < minSetCover) {
                 minSetCover = cardinalityOfValidSetCover;
                 System.arraycopy(randomBoolean, 0, randomBooleanResultWithMinSetCover, 0, numberOfVertices);
             }
-            //System.out.println("--- cardinalityOfValidSetCover = " + cardinalityOfValidSetCover + "\n");
         }
         System.out.println("\n minSetCover = " + minSetCover + " for " + numberOfIterations + " iterations");
-        for (Boolean b : randomBooleanResultWithMinSetCover) {
-            System.out.print(" " + b);
-        }
+        for (Boolean b : randomBooleanResultWithMinSetCover) System.out.print(" " + b);
     }
 
 //    static ArrayList<ArrayList<Integer>> inputInit(int v) {
@@ -159,8 +145,8 @@ public class Main {
                 }
             }
         }
-        for (int k = 0; k < v; k++) {
-            if (!test[k]) return false;
+        for (Boolean b : test) {
+            if (!b) return false;
         }
         return true;
     }
