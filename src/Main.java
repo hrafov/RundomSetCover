@@ -2,18 +2,9 @@ import java.util.ArrayList;
 import java.util.Random;
 public class Main {
     public static void main(String... args) {
-        // Creating a graph with 5 vertices - https://www.geeksforgeeks.org/graph-and-its-representations/
+
         int v = 5;
-        ArrayList<ArrayList<Integer>> adj = new ArrayList<>(v);
-        for (int i = 0; i < v; i++)
-            adj.add(new ArrayList<>());
-        addEdge(adj, 0, 1);
-        addEdge(adj, 0, 4);
-        addEdge(adj, 1, 2);
-        addEdge(adj, 1, 3);
-        addEdge(adj, 1, 4);
-        addEdge(adj, 2, 3);
-        addEdge(adj, 3, 4);
+        ArrayList<ArrayList<Integer>> adj = inputInit(v);
 
         int minSetCover = Integer.MAX_VALUE;
         boolean[] randomBoolean = new boolean[v];
@@ -43,6 +34,21 @@ public class Main {
             System.out.println("--- cardinalityOfValidSetCover = " + cardinalityOfValidSetCover + "\n");
         }
         System.out.println("\n minSetCover = " + minSetCover + " for " + numberOfIterations + " iterations");
+    }
+
+    static ArrayList<ArrayList<Integer>> inputInit(int v) {
+        // Creating a graph with 5 vertices - https://www.geeksforgeeks.org/graph-and-its-representations/
+        ArrayList<ArrayList<Integer>> adj = new ArrayList<>(v);
+        for (int i = 0; i < v; i++)
+            adj.add(new ArrayList<>());
+        addEdge(adj, 0, 1);
+        addEdge(adj, 0, 4);
+        addEdge(adj, 1, 2);
+        addEdge(adj, 1, 3);
+        addEdge(adj, 1, 4);
+        addEdge(adj, 2, 3);
+        addEdge(adj, 3, 4);
+        return adj;
     }
 
     static  boolean isValidSetCover(ArrayList<ArrayList<Integer>> adj, boolean[] randomBoolean) {
