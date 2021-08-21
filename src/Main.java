@@ -1,16 +1,17 @@
 import java.util.ArrayList;
 import java.util.Random;
 public class Main {
-    public static void main(String... args) {
+    public static void main(String...args) {
 
         int numberOfVertices = 16;
-        int numberOfIterations = 5000;
+        int numberOfIterations = 50000;
 
         ArrayList<ArrayList<Integer>> adj = inputInit(numberOfVertices);
 
         int minSetCover = Integer.MAX_VALUE;
         boolean[] randomBoolean = new boolean[numberOfVertices];
         Random random = new Random();
+        boolean[] randomBooleanResultWithMinSetCover = new boolean[numberOfVertices];
 
         for (int i = 0; i < numberOfIterations; i++) {
             System.out.println("\n\n --- Iteration number(i): " + i + "\n");
@@ -28,10 +29,16 @@ public class Main {
                 if (randomBoolean[l]) cardinalityOfValidSetCover++;
             }
 
-            if (cardinalityOfValidSetCover < minSetCover) minSetCover = cardinalityOfValidSetCover;
+            if (cardinalityOfValidSetCover < minSetCover) {
+                minSetCover = cardinalityOfValidSetCover;
+                System.arraycopy(randomBoolean, 0, randomBooleanResultWithMinSetCover, 0, numberOfVertices);
+            }
             System.out.println("--- cardinalityOfValidSetCover = " + cardinalityOfValidSetCover + "\n");
         }
         System.out.println("\n minSetCover = " + minSetCover + " for " + numberOfIterations + " iterations");
+        for (Boolean b : randomBooleanResultWithMinSetCover) {
+            System.out.print(" " + b);
+        }
     }
 
 //    static ArrayList<ArrayList<Integer>> inputInit(int v) {
