@@ -14,13 +14,13 @@ public class Main {
         boolean[] randomBooleanResultWithMinSetCover = new boolean[numberOfVertices];
 
         for (int i = 0; i < numberOfIterations; i++) {
-            System.out.println("\n\n --- Iteration number(i): " + i + "\n");
+            //System.out.println("\n\n --- Iteration number(i): " + i + "\n");
 
             for (int j = 0; j < numberOfVertices; j++) { // random boolean set 01100
                 randomBoolean[j] = random.nextBoolean();
-                System.out.print(" " + randomBoolean[j]);
+                //System.out.print(" " + randomBoolean[j]);
             }
-            System.out.println();
+            //System.out.println();
 
             if (!isValidSetCover(adj, randomBoolean)) continue;
 
@@ -33,7 +33,7 @@ public class Main {
                 minSetCover = cardinalityOfValidSetCover;
                 System.arraycopy(randomBoolean, 0, randomBooleanResultWithMinSetCover, 0, numberOfVertices);
             }
-            System.out.println("--- cardinalityOfValidSetCover = " + cardinalityOfValidSetCover + "\n");
+            //System.out.println("--- cardinalityOfValidSetCover = " + cardinalityOfValidSetCover + "\n");
         }
         System.out.println("\n minSetCover = " + minSetCover + " for " + numberOfIterations + " iterations");
         for (Boolean b : randomBooleanResultWithMinSetCover) {
